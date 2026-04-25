@@ -2,7 +2,7 @@
 /idea
 idea
 .env
-*.db
-*.log
-data/
-raft.db
+# *.db
+# *.log
+# data/
+# raft.db
