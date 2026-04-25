@@ -1,5 +1,6 @@
-## Distributed Key-Value Store (a la etcd)
+## RaftrixDB - Distributed Key-Value Store
 
+RaftrixDB is a distributed, strongly consistent key-value store built from scratch using the **Raft consensus algorithm**. Inspired by etcd, it is designed to be a reliable foundation for distributed systems, ensuring data consistency and high availability even in the presence of network partitions.
 
 ### Core Components and Architecture
 

@@ -1,0 +1,25 @@
+# Default config for a single-node dev setup.
+# Copy and modify for each node in a real cluster.
+
+node:
+  id: "node-1"
+  addr: "localhost:7001"   # Raft RPC address (node-to-node)
+
+peers:
+  - id: "node-2"
+    addr: "localhost:7002"
+  - id: "node-3"
+    addr: "localhost:7003"
+
+raft:
+  election_timeout_min_ms: 150
+  election_timeout_max_ms: 300
+  heartbeat_interval_ms:   50
+  snapshot_threshold:      10000
+
+storage:
+  type:     "persistent"   # "memory" or "persistent"
+  data_dir: "./data/node-1"
+
+server:
+  addr: ":8080"            # Client-facing HTTP API
