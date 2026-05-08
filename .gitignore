@@ -1,3 +1,8 @@
 .idea
 /idea
 idea
+.env
+*.db
+*.log
+data/
+raft.db

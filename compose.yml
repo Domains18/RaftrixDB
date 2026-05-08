@@ -1,0 +1,62 @@
+services:
+  node1:
+    build: .
+    command: ["-config", "/etc/raftrixdb/node1.yaml"]
+    volumes:
+      - ./config/cluster:/etc/raftrixdb
+      - node1-data:/data
+    ports:
+      - "7001:7001"   # Raft RPC
+      - "8081:8080"   # Client API
+      - "9091:9090"   # Metrics
+    networks: [raftnet]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/v1/status"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  node2:
+    build: .
+    command: ["-config", "/etc/raftrixdb/node2.yaml"]
+    volumes:
+      - ./config/cluster:/etc/raftrixdb
+      - node2-data:/data
+    ports:
+      - "7002:7002"
+      - "8082:8080"
+      - "9092:9090"
+    networks: [raftnet]
+    depends_on: [node1]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/v1/status"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+  node3:
+    build: .
+    command: ["-config", "/etc/raftrixdb/node3.yaml"]
+    volumes:
+      - ./config/cluster:/etc/raftrixdb
+      - node3-data:/data
+    ports:
+      - "7003:7003"
+      - "8083:8080"
+      - "9093:9090"
+    networks: [raftnet]
+    depends_on: [node1]
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:8080/v1/status"]
+      interval: 5s
+      timeout: 2s
+      retries: 5
+
+volumes:
+  node1-data:
+  node2-data:
+  node3-data:
+
+networks:
+  raftnet:
+    driver: bridge

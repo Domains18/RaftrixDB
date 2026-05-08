@@ -1,0 +1,22 @@
+node:
+  id: "node-3"
+  addr: "node3:7003"
+
+peers:
+  - id: "node-1"
+    addr: "node1:7001"
+  - id: "node-2"
+    addr: "node2:7002"
+
+raft:
+  election_timeout_min_ms: 150
+  election_timeout_max_ms: 300
+  heartbeat_interval_ms:   50
+  snapshot_threshold:      10000
+
+storage:
+  type:     "persistent"
+  data_dir: "/data/node-3"
+
+server:
+  addr: ":8080"
