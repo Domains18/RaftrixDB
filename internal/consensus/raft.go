@@ -732,7 +732,7 @@ func (n *RaftNode) applyCommand(cmd types.Command) error {
 		} else if err != nil {
 			return err
 		}
-		if string(existing) != string(cmd.PrevValue) {
+if !bytes.Equal(existing, cmd.PrevValue) {
 			return fmt.Errorf("CAS failed: value mismatch")
 		}
 		return n.storage.Put(cmd.Key, cmd.Value)
