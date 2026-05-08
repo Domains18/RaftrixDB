@@ -490,7 +490,7 @@ func (n *RaftNode) startElection() {
 
 			voteMu.Lock()
 			votes++
-			if votes >= quorum+1 { // +1 because quorum counts peers only
+if votes >= quorum {
 				select {
 				case wonCh <- struct{}{}:
 				default:
